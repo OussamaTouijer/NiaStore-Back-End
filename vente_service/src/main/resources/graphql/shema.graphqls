@@ -1,0 +1,72 @@
+type Query {
+  getAllVentes: [VenteResponseDTO]
+  getVenteById(id: Float!): VenteResponseDTO
+}
+
+type Mutation {
+  save(vente: VenteRequestDTO): VenteResponseDTO
+  delete(id: Float!): Vente
+  update(id: Float!, input: VenteRequestDTO!): Vente
+}
+
+type VenteResponseDTO {
+  idV: Float
+  idA: Float
+  idP: Float
+  acheteur: Acheteur
+  produit: Produit
+}
+
+type Vente {
+  idV: Float
+  idA: Float
+  idP: Float
+  acheteur: Acheteur
+  produit: Produit
+}
+
+input VenteRequestDTO {
+  idV: Float
+  idA: Float
+  idP: Float
+  acheteur: AcheteurInput
+  produit: ProduitInput
+}
+
+type Acheteur {
+  idAcheteur: Float
+  nom: String
+  prenom: String
+  email: String
+  adresse: String
+  ville: String
+  produit: Produit
+}
+
+type Produit {
+  idProduit: Float
+  nom: String
+  marque: String
+  description: String
+  prix: Float
+  quantite: Float
+}
+
+input AcheteurInput {
+  idAcheteur: Float
+  nom: String
+  prenom: String
+  email: String
+  adresse: String
+  ville: String
+  produit: ProduitInput
+}
+
+input ProduitInput {
+  idProduit: Float
+  nom: String
+  marque: String
+  description: String
+  prix: Float
+  quantite: Float
+}

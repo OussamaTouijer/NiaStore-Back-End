@@ -1,0 +1,39 @@
+type Query{
+     getAllAcheteurs : [AcheteurResponseDTO]
+     getAcheteurById(id : Float!):Acheteur
+}
+
+type Mutation{
+     save(acheteur:AcheteurRequestDTO):AcheteurResponseDTO
+     delete(id : Float! ) : Acheteur
+     update(id : Float!,input:AcheteurRequestDTO!) :Acheteur
+}
+
+
+type AcheteurResponseDTO {
+     idAcheteur : Float ,
+     nom : String ,
+     prenom : String
+     email : String,
+     adresse : String,
+     ville : String,
+}
+
+type Acheteur {
+     idAcheteur : Float ,
+     nom : String ,
+     prenom : String
+     email : String,
+     adresse : String,
+     ville : String,
+}
+
+input AcheteurRequestDTO{
+     idAcheteur : Float ,
+     nom : String ,
+     prenom : String
+     email : String,
+     adresse : String,
+     ville : String,
+}
+

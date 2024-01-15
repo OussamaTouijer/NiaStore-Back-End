@@ -1,0 +1,37 @@
+type Query{
+     getAll : [ProduitResponseDTO]
+     getProduitById(id : Float!):Produit
+}
+
+type Mutation{
+     save(produit:ProduitRequestDTO):ProduitResponseDTO
+     delete(id : Float! ) : Produit
+     update(id : Float!,input:ProduitRequestDTO!) :Produit
+}
+
+type ProduitResponseDTO {
+     idProduit : Float ,
+     nom : String ,
+     marque : String
+     description : String,
+     prix : Float,
+     quantite : Float,
+}
+
+type Produit {
+     idProduit : Float ,
+     nom : String ,
+     marque : String
+     description : String,
+     prix : Float,
+     quantite : Float,
+}
+
+input ProduitRequestDTO{
+     idProduit : Float ,
+     nom : String ,
+     marque : String
+     description : String,
+     prix : Float,
+     quantite : Float,
+}
