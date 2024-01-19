@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discovery-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: discovery-service-app   # Corrected label here
+  template:
+    metadata:
+      labels:
+        app: discovery-service-app   # Matching label here
+    spec:
+      containers:
+        - name: store-discovery-service-container
+          image: touijeroussama/store-discovery-service-img

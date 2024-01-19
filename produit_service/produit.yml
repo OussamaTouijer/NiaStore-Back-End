@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: produit-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: produit-service-app   # Corrected label here
+  template:
+    metadata:
+      labels:
+        app: produit-service-app   # Matching label here
+    spec:
+      containers:
+        - name: store-produit-service-container
+          image: touijeroussama/store-produit-service-img

@@ -34,8 +34,8 @@ services:
     expose:
       - '8079'
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
-      interval: 10s
+      test: [ "CMD", "curl", "-f", "http://localhost:8079/actuator/health"]
+      interval: 30s
       retries: 10
     environment:
       - DISCOVERY_SERVICE_URL=http://store-discovery-service:8761/eureka
@@ -52,7 +52,7 @@ services:
       - '8081'
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
-      interval: 10s
+      interval: 30s
       retries: 10
     environment:
       - DISCOVERY_SERVICE_URL=http://store-discovery-service:8761/eureka
@@ -86,10 +86,3 @@ services:
     depends_on:
       store-config-service:
         condition: service_healthy
-  front-send-angular:
-    build: ./angular-front-end
-    container_name: front-send-angular
-    ports:
-      - '84:80'
-    expose:
-      - '80'

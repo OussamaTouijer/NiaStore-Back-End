@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: config-service-service
+spec:
+  selector:
+    app: config-service-app   # Corrected label here
+  ports:
+    - protocol: 'TCP'
+      port: 9999
+      targetPort: 9999
+  type: LoadBalancer

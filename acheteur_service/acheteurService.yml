@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: acheteur-service-service
+spec:
+  selector:
+    app: acheteur-service-app   # Corrected label here
+  ports:
+    - protocol: 'TCP'
+      port: 8081
+      targetPort: 8081
+  type: LoadBalancer
