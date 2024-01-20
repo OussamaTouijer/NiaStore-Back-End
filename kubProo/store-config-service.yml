@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-config-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: store-config-service
+  template:
+    metadata:
+      labels:
+        app: store-config-service
+    spec:
+      containers:
+        - name: store-config-service
+          image: touijeroussama/store-config-service-img  # Utilisez votre image Docker
+          ports:
+            - containerPort: 9999
+          env:
+            - name: DISCOVERY_SERVICE_URL
+              value: "http://store-discovery-service:8761/eureka"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: store-config-service
+spec:
+  selector:
+    app: store-config-service
+  ports:
+    - protocol: TCP
+      port: 9999
+      targetPort: 9999
+  type: LoadBalancer
