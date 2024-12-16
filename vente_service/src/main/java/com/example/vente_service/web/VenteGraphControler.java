@@ -17,10 +17,10 @@ public class VenteGraphControler {
     VenteServiceInterface venteServiceInterface;
 
     @QueryMapping
-    public List<VenteResponseDTO> getAllAcheteurs(){return venteServiceInterface.getAll();}
+    public List<VenteResponseDTO> getAllVentes(){return venteServiceInterface.getAll();}
 
     @QueryMapping
-    public VenteResponseDTO getAcheteurById(@Argument Integer id){ return venteServiceInterface.getVenteById(id);}
+    public VenteResponseDTO getVenteById(@Argument Integer id){ return venteServiceInterface.getVenteById(id);}
 
 
     @MutationMapping

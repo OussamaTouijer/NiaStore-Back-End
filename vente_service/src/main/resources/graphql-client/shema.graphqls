@@ -5,8 +5,8 @@ type Query {
 
 type Mutation {
   save(vente: VenteRequestDTO): VenteResponseDTO
-  delete(id: Float!): Vente
-  update(id: Float!, input: VenteRequestDTO!): Vente
+  delete(id: Float!): VenteResponseDTO
+  update(id: Float!, input: VenteRequestDTO!): VenteResponseDTO
 }
 
 type VenteResponseDTO {
