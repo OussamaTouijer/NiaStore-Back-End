@@ -1,4 +1,24 @@
+version: '3.8'
+
 services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_dbNia
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: NiaStore-Backend_DB
+      MYSQL_USER: oussama
+      MYSQL_PASSWORD: oussama
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+
   store-discovery-service:
     build: ./discovery_service
     container_name: store-discovery-service
@@ -10,6 +30,7 @@ services:
       test: [ "CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
       interval: 10s
       retries: 4
+
   store-config-service:
     build: ./config_service
     container_name: store-config-service
@@ -26,6 +47,7 @@ services:
     depends_on:
       store-discovery-service:
         condition: service_healthy
+
   store-produit-service:
     build: ./produit_service
     container_name: store-produit-service
@@ -40,9 +62,13 @@ services:
     environment:
       - DISCOVERY_SERVICE_URL=http://store-discovery-service:8761/eureka
       - CONFIG_SERVICE_URL=http://store-config-service:9999
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/NiaStore-Backend_DB
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
     depends_on:
       store-config-service:
         condition: service_healthy
+
   store-acheteur-service:
     build: ./acheteur_service
     container_name: store-acheteur-service
@@ -57,9 +83,13 @@ services:
     environment:
       - DISCOVERY_SERVICE_URL=http://store-discovery-service:8761/eureka
       - CONFIG_SERVICE_URL=http://store-config-service:9999
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/NiaStore-Backend_DB
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
     depends_on:
       store-produit-service:
         condition: service_healthy
+
   store-vente-service:
     build: ./vente_service
     container_name: store-vente-service
@@ -70,9 +100,13 @@ services:
     environment:
       - DISCOVERY_SERVICE_URL=http://store-discovery-service:8761/eureka
       - CONFIG_SERVICE_URL=http://store-config-service:9999
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/NiaStore-Backend_DB
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
     depends_on:
       store-acheteur-service:
         condition: service_healthy
+
   store-gateway-service:
     build: ./gateway_service
     container_name: store-gateway-service
@@ -86,3 +120,18 @@ services:
     depends_on:
       store-config-service:
         condition: service_healthy
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadminNia
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "2002:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
