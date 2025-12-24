@@ -2,6 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/NiaStore-Front/NiaStore-Admin-Hub" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/micro-config-repos/micro-config-repos" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/vente_service" vcs="Git" />
   </component>
 </project>
